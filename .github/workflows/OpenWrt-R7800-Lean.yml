@@ -36,7 +36,7 @@ env:
   # 脚本
   DIY_SH: OpenWrt-R7800-Lean.sh
   # 开启SSH连接
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   # 上传分支
   UPLOAD_BRANCH: true
   # 分支
@@ -128,10 +128,11 @@ jobs:
         ../$DIY_SH
         make defconfig
 
-    # SSH连接
-    # - name: SSH connection to Actions
-    #  uses: P3TERX/debugger-action@master
-    #  if: env.SSH_ACTIONS == 'true'
+     # SSH连接
+    - name: SSH connection to Actions
+      run: |
+        uses: P3TERX/debugger-action@master
+        if: env.SSH_ACTIONS == 'true'
 
     # 下载软件包
     - name: Make Download
